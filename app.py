@@ -27,6 +27,7 @@ if uploaded_file is not None:
             
             results.append({
                 "Ticker": ticker,
+                "Trade Date": row['Trade_Date'],
                 "Current Price": round(current_price, 2),
                 "Sell Price": row['Sell_Price'],
                 "Threshold": row['Threshold_Price'],
