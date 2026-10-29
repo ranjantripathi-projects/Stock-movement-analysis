@@ -49,7 +49,11 @@ if uploaded_file is not None:
         color = '#ff4b4b' if val == '🚨 TRIGGERED' else ''
         return f'background-color: {color}'
         
-    st.dataframe(results_df.style.applymap(highlight_alerts, subset=['Status']), use_container_width=True)
+    if not results_df.empty:
+    st.dataframe(results_df.style.map(highlight_alerts, subset=['Status']), use_container_width=True)
+else:
+    st.warning("No valid data could be fetched. Check your tickers.")
+    
     
     # Summary Metrics
     total_pnl = results_df['Notional P&L'].sum()
