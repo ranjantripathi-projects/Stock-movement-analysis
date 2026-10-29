@@ -50,9 +50,9 @@ if uploaded_file is not None:
         return f'background-color: {color}'
         
     if not results_df.empty:
-    st.dataframe(results_df.style.map(highlight_alerts, subset=['Status']), use_container_width=True)
+        st.dataframe(results_df.style.map(highlight_alerts, subset=['Status']), use_container_width=True)
 else:
-    st.warning("No valid data could be fetched. Check your tickers.")
+        st.warning("No valid data could be fetched. Check your tickers.")
     
     
     # Summary Metrics
