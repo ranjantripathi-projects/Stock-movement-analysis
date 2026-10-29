@@ -6,7 +6,7 @@ st.set_page_config(page_title="Sold Stocks Tracker", layout="wide")
 st.title("📊 Sold Stocks Tracker & Notional P&L")
 
 # File Uploader
-uploaded_file = st.file_uploader("Upload your sold_stocks.xlsx", type=["xlsx"])
+uploaded_file = st.file_uploader("Upload your sold_stocks_lots_final.xlsx", type=["xlsx"])
 
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file)
@@ -51,10 +51,9 @@ if uploaded_file is not None:
         
     if not results_df.empty:
         st.dataframe(results_df.style.map(highlight_alerts, subset=['Status']), use_container_width=True)
-else:
+        
+        # Summary Metrics
+        total_pnl = results_df['Notional P&L'].sum()
+        st.metric(label="Total Notional P&L (Missed Gains / Saved Losses)", value=f"₹{total_pnl:,.2f}")
+    else:
         st.warning("No valid data could be fetched. Check your tickers.")
-    
-    
-    # Summary Metrics
-    total_pnl = results_df['Notional P&L'].sum()
-    st.metric(label="Total Notional P&L (Missed Gains / Saved Losses)", value=f"₹{total_pnl:,.2f}")
